@@ -1,17 +1,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+
+class Sample extends React.Component {
+  constructor(props) {
+    super(props);
+    // to bind the method with event handler without (). 
+    this.handleChange = this.handleChange.bind(this);
+    this.state =
+    { 
+        value: ''
+    };
+  }
+  handleChange(e){
+    this.setState({value: e.target.value});
+  }
+  render(){
+    return <>
+    <body>
+      <div className='ln'>
+        <label className= "l1">Input</label>
+        <div  className='sub'>
+        <textarea className="input" onChange={this.handleChange} defaultValue={this.state.value}></textarea>
+        </div>
+      </div>
+      <div>
+        <label>Pro Note</label>
+        <div  className='sub'>
+        <textarea className="output" value={this.state.value} readOnly></textarea>
+        </div>
+      </div>
+      </body>
+    </>
+  }
+
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+root.render(<Sample />);
